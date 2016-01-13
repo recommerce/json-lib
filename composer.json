@@ -1,0 +1,19 @@
+{
+    "name": "recommerce/json-lib",
+    "require": {
+        "justinrainbow/json-schema": "1.5.*"
+    },
+    "require-dev": {
+        "humbug/humbug": "~1.0@dev",
+        "behat/behat": "^3.0",
+        "phing/phing": "^2.10",
+        "phpmd/phpmd": "^2.2",
+        "squizlabs/php_codesniffer": "^2.3",
+        "pdepend/pdepend": "^2.0",
+        "sebastian/phpcpd": "^2.0",
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {"Recommerce\\": "src/"}
+    }
+}

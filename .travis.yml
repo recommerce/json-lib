@@ -1,0 +1,12 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+install:
+  - composer self-update
+  - composer update --dev
+addons:
+  code_climate:
+    repo_token: dc99f3255bf1e45e00f23609aee1cbba39bcb36f8a49c9db786f20406ad59a11
+after_script:
+  - vendor/bin/test-reporter
