@@ -24,4 +24,12 @@ class DecodedContent implements ContentInterface
     {
         return $this->content;
     }
+
+    /**
+     * @return string
+     */
+    public function getEncodedContent()
+    {
+        return json_encode($this->content);
+    }
 }

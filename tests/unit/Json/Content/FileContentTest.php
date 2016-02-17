@@ -4,16 +4,34 @@ namespace Recommerce\Json\Content;
 
 class FileContentTest extends \PHPUnit_Framework_TestCase
 {
+    private $instance;
+
+    private $fileSchema;
+
+    public function setUp()
+    {
+        $this->fileSchema = __DIR__ . '/json-schema-test.json';
+        $this->instance = new FileContent($this->fileSchema);
+    }
+
     public function testCreateObject()
     {
-        $fileSchema = __DIR__ . '/json-schema-test.json';
+        $this->assertInstanceOf(ContentInterface::class, $this->instance);
+    }
 
-        $jsonContent = new FileContent($fileSchema);
-
-        $this->assertInstanceOf(ContentInterface::class, $jsonContent);
+    public function testGetJsonContent()
+    {
         $this->assertEquals(
-            json_decode(file_get_contents($fileSchema)),
-            $jsonContent->getJsonContent()
+            json_decode(file_get_contents($this->fileSchema)),
+            $this->instance->getJsonContent()
+        );
+    }
+
+    public function testGetEncodedContent()
+    {
+        $this->assertEquals(
+            file_get_contents($this->fileSchema),
+            $this->instance->getEncodedContent()
         );
     }
 

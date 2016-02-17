@@ -39,4 +39,12 @@ class FileContent implements ContentInterface
     {
         return $this->encodedContent->getJsonContent();
     }
+
+    /**
+     * @return string
+     */
+    public function getEncodedContent()
+    {
+        return $this->encodedContent->getEncodedContent();
+    }
 }
