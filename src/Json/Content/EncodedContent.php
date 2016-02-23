@@ -25,6 +25,7 @@ class EncodedContent implements ContentInterface
 
     /**
      * @return string
+     * @deprecated Use getDecodedContent
      */
     public function getJsonContent()
     {
