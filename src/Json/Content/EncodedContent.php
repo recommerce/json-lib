@@ -24,7 +24,7 @@ class EncodedContent implements ContentInterface
     }
 
     /**
-     * @return string
+     * @return mixed
      * @deprecated Use getDecodedContent
      */
     public function getJsonContent()
@@ -33,7 +33,7 @@ class EncodedContent implements ContentInterface
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDecodedContent()
     {

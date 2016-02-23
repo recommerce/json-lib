@@ -5,13 +5,13 @@ namespace Recommerce\Json\Content;
 interface ContentInterface
 {
     /**
-     * @return string
+     * @return mixed
      * @deprecated Use getDecodedContent
      */
     public function getJsonContent();
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDecodedContent();
 

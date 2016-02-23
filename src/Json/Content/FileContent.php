@@ -33,7 +33,7 @@ class FileContent implements ContentInterface
     }
 
     /**
-     * @return string
+     * @return mixed
      * @deprecated Use getDecodedContent
      */
     public function getJsonContent()
@@ -42,7 +42,7 @@ class FileContent implements ContentInterface
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getDecodedContent()
     {
