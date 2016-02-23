@@ -6,8 +6,14 @@ interface ContentInterface
 {
     /**
      * @return string
+     * @deprecated Use getDecodedContent
      */
     public function getJsonContent();
+
+    /**
+     * @return string
+     */
+    public function getDecodedContent();
 
     /**
      * @return string
