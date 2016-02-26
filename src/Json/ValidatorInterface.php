@@ -19,6 +19,18 @@ interface ValidatorInterface
     public function validate(ContentInterface $jsonContent);
 
     /**
+     * @param mixed $jsonDecodedContent
+     * @return mixed json decoded content
+     */
+    public function validateDecodedContent($jsonDecodedContent);
+
+    /**
+     * @param string $jsonFile
+     * @return mixed json decoded content
+     */
+    public function validateFileContent($jsonFile);
+
+    /**
      * @param string $jsonEncodedContent
      * @return mixed json decoded content
      */
