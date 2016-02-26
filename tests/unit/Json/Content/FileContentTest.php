@@ -10,7 +10,7 @@ class FileContentTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->fileSchema = __DIR__ . '/json-schema-test.json';
+        $this->fileSchema = 'resources/tests/json-schema-test.json';
         $this->instance = new FileContent($this->fileSchema);
     }
 

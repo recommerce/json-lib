@@ -3,6 +3,9 @@
 namespace Recommerce\Json;
 
 use Recommerce\Json\Content\ContentInterface;
+use Recommerce\Json\Content\DecodedContent;
+use Recommerce\Json\Content\EncodedContent;
+use Recommerce\Json\Content\FileContent;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,7 +54,7 @@ EOD;
         $this->schemaContent = $this->getMock(ContentInterface::class);
         $this
             ->schemaContent
-            ->method('getJsonContent')
+            ->method('getDecodedContent')
             ->willReturn(json_decode($this->jsonSchema));
 
         $this->instance = new Validator($this->schemaContent);
@@ -77,7 +80,7 @@ EOD;
         $this
             ->jsonContent
             ->expects($this->once())
-            ->method('getJsonContent')
+            ->method('getDecodedContent')
             ->willReturn(json_decode($jsonContent));
 
         $this->assertNull($this->instance->validate($this->jsonContent));
@@ -97,9 +100,81 @@ EOD;
         $this
             ->jsonContent
             ->expects($this->exactly(2))
-            ->method('getJsonContent')
+            ->method('getDecodedContent')
             ->willReturn(json_decode($jsonContent));
 
         $this->instance->validate($this->jsonContent);
+    }
+
+    public function testValidateDecodedContent()
+    {
+        $jsonDecodedContent = [
+            'attr1' => 'val1',
+            'attr2' => 'val2'
+        ];
+
+        $instance = $this
+            ->getMockBuilder(Validator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $instance
+            ->expects($this->once())
+            ->method('validate')
+            ->with(new DecodedContent($jsonDecodedContent))
+            ->willReturn(null);
+
+        $this->assertSame(
+            $jsonDecodedContent,
+            $instance->validateDecodedContent($jsonDecodedContent)
+        );
+    }
+
+    public function testValidateEncodedContent()
+    {
+        $jsonEncodedContent = json_encode([
+            'attr1' => 'val1',
+            'attr2' => 'val2'
+        ]);
+
+        $instance = $this
+            ->getMockBuilder(Validator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $instance
+            ->expects($this->once())
+            ->method('validate')
+            ->with(new EncodedContent($jsonEncodedContent))
+            ->willReturn(null);
+
+        $this->assertEquals(
+            json_decode($jsonEncodedContent),
+            $instance->validateEncodedContent($jsonEncodedContent)
+        );
+    }
+
+    public function testValidateFileContent()
+    {
+        $jsonFile = 'resources/tests/json-schema-test.json';
+
+        $instance = $this
+            ->getMockBuilder(Validator::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['validate'])
+            ->getMock();
+
+        $instance
+            ->expects($this->once())
+            ->method('validate')
+            ->with(new FileContent($jsonFile))
+            ->willReturn(null);
+
+        $this->assertEquals(
+            json_decode(file_get_contents($jsonFile)),
+            $instance->validateFileContent($jsonFile)
+        );
     }
 }

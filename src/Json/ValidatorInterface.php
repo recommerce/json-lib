@@ -17,4 +17,10 @@ interface ValidatorInterface
      * @throws JsonFormatException
      */
     public function validate(ContentInterface $jsonContent);
+
+    /**
+     * @param string $jsonEncodedContent
+     * @return mixed json decoded content
+     */
+    public function validateEncodedContent($jsonEncodedContent);
 }
